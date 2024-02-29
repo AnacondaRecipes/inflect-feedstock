@@ -20,6 +20,7 @@ requirements:
     - python
     - setuptools-scm >=3.4.1
     - toml
+    - wheel
   run:
     - importlib-metadata  # [py<38]
     - python
