@@ -1,5 +1,5 @@
 {% set name = "inflect" %}
-{% set version = "5.3.0" %}
+{% set version = "7.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 41a23f6788962e9775e40e2ecfb1d6455d02de315022afeedd3c5dc070019d73
+  sha256: 63da9325ad29da81ec23e055b41225795ab793b4ecb483be5dc1fa363fd4717e
 
 build:
-  skip: true  # [py<36]
-  number: 1
-  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
+  skip: true  # [py<38]
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-build-isolation  --no-deps --ignore-installed -vv
 
 requirements:
   host:
@@ -20,9 +20,12 @@ requirements:
     - python
     - setuptools-scm >=3.4.1
     - toml
+    - wheel
+    - setuptools
   run:
-    - importlib-metadata  # [py<38]
     - python
+    - typing_extensions
+    - pydantic >=1.9.1
 
 test:
   requires:
@@ -38,6 +41,8 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: Correctly generate plurals, singular nouns, ordinals, indefinite articles; convert numbers to words
+  description: |
+    Correctly generate plurals, ordinals, indefinite articles; convert numbers to words
   dev_url: https://github.com/jazzband/inflect
   doc_url: https://github.com/jazzband/inflect
 
