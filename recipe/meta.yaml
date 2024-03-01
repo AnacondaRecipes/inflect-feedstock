@@ -21,8 +21,8 @@ requirements:
     - setuptools-scm >=3.4.1
     - toml
     - wheel
+    - setuptools
   run:
-    - importlib-metadata  # [py<38]
     - python
     - typing_extensions
     - pydantic >=1.9.1
