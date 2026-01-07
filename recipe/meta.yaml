@@ -1,5 +1,5 @@
 {% set name = "inflect" %}
-{% set version = "7.0.0" %}
+{% set version = "7.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,33 +7,38 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 63da9325ad29da81ec23e055b41225795ab793b4ecb483be5dc1fa363fd4717e
+  sha256: faf19801c3742ed5a05a8ce388e0d8fe1a07f8d095c82201eb904f5d27ad571f
 
 build:
-  skip: true  # [py<38]
-  number: 1
+  skip: true  # [py<39]
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-build-isolation  --no-deps --ignore-installed -vv
 
 requirements:
   host:
     - pip
     - python
+    - setuptools >=61.2
     - setuptools-scm >=3.4.1
     - toml
     - wheel
-    - setuptools
   run:
     - python
-    - typing_extensions
-    - pydantic >=1.9.1
+    - more-itertools >=8.5.0
+    - typeguard >=4.0.1
+    - typing_extensions  # [py<39]
 
 test:
-  requires:
-    - pip
   imports:
     - inflect
+  source_files:
+    - pytest.ini
+  requires:
+    - pip
+    - pytest
   commands:
-    - python -m pip check
+    - pip check
+    - pytest --pyargs inflect -v
 
 about:
   home: https://github.com/jazzband/inflect
