@@ -20,6 +20,7 @@ requirements:
     - python
     - setuptools >=77
     - setuptools-scm >=3.4.1
+    - toml
     - wheel
   run:
     - python
